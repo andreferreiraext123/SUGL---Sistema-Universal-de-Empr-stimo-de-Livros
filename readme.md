@@ -61,5 +61,24 @@ venv/
    ```bash
    git clone https://github.com/seuusuario/biblioteca-comunitaria.git
 
+
+## ERD (Diagrama do projeto)
+biblioteca_comunitaria/
+│
+├── app/
+│   ├── templates/       # Para armazenar os arquivos HTML.
+│   ├── static/          # Para arquivos estáticos (CSS, JavaScript).
+│   ├── models/          # Para definir os modelos de dados.
+│   ├── routes/          # Para gerenciar as rotas da aplicação.
+│   └── utils/           # Para funções utilitárias.
+│
+├── migrations/          # Para gerenciar as migrações do banco de dados.
+│
+├── tests/               # Para armazenar os testes da aplicação.
+│
+├── requirements.txt     # Para listar as dependências do projeto.
+├── config.py            # Para configurações da aplicação.
+└── run.py               # Para executar a aplicação.
+
 ## Licença
 Este projeto está licenciado sob a [MIT License](LICENSE).   
