@@ -69,8 +69,15 @@ biblioteca_comunitaria/
 │   ├── templates/       # Para armazenar os arquivos HTML.
 │   ├── static/          # Para arquivos estáticos (CSS, JavaScript).
 │   ├── models/          # Para definir os modelos de dados.
+│   │   ├── __init__.py  # Inicialização dos modelos (opcional)
+│   │   ├── livro.py
+│   │   ├── usuario.py
+│   │   └── emprestimo.py
 │   ├── routes/          # Para gerenciar as rotas da aplicação.
-│   └── utils/           # Para funções utilitárias.
+│   │   ├── __init__.py  # Inicialização das rotas (opcional)
+│   │   └── routes.py
+│   ├── utils/           # Para funções utilitárias.
+│   └── init.py          # Inicialização da aplicação e do banco de dados.
 │
 ├── migrations/          # Para gerenciar as migrações do banco de dados.
 │
@@ -78,7 +85,9 @@ biblioteca_comunitaria/
 │
 ├── requirements.txt     # Para listar as dependências do projeto.
 ├── config.py            # Para configurações da aplicação.
-└── run.py               # Para executar a aplicação.
+├── run.py               # Para executar a aplicação.
+└── manage.py            # Para gerenciar as migrações do banco de dados.
+
 
 ## Licença
 Este projeto está licenciado sob a [MIT License](LICENSE).   
