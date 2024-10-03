@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="container">
+        <!-- Seção de Cadastro de Livro -->
         <div class="section">
             <h1>Cadastro de Livro</h1>
             <form action="/submit" method="POST">
@@ -30,6 +31,7 @@
             </form>
         </div>
 
+        <!-- Seção de Lista de Livros -->
         <div class="section">
             <h1>Lista de Livros</h1>
             <form action="/search" method="GET">
@@ -37,12 +39,44 @@
                 <input type="text" id="search" name="search" required>
                 <input type="submit" value="Pesquisar">
             </form>
+
+            <!-- Exibição do resultado da pesquisa -->
+            {% if livro_pesquisado %}
+            <div class="search-result">
+                <h2>Resultado da Pesquisa:</h2>
+                <p>ID: {{ livro_pesquisado[0] }} | Título: {{ livro_pesquisado[1] }} | Autor: {{ livro_pesquisado[2] }}</p>
+                <form action="/delete/{{ livro_pesquisado[0] }}" method="POST">
+                    <input type="submit" value="Excluir Livro">
+                </form>
+            </div>
+            {% endif %}
+
             <div class="book-list">
-                <!-- Aqui você pode adicionar a lista de livros dinamicamente -->
-                <p>ID | Título | Responsável</p>
+                <ul>
+                    <!-- Loop para exibir livros e status -->
+                    {% for livro in livros %}
+                    <li>
+                        ID: {{ livro[0] }} | Título: {{ livro[1] }} | Status: {{ livro[2] }}
+                        <form action="/update_status" method="POST" style="display:inline;">
+                            <input type="hidden" name="livro_id" value="{{ livro[0] }}">
+                            <button type="submit">
+                                {% if livro[2] == 'Disponível' %}
+                                    Marcar como Emprestado
+                                {% else %}
+                                    Marcar como Disponível
+                                {% endif %}
+                            </button>
+                        </form>
+                        <form action="/delete/{{ livro[0] }}" method="POST" style="display:inline;">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
 
+        <!-- Seção de Empréstimo de Livros -->
         <div class="section">
             <h1>Empréstimo</h1>
             <form action="/loan" method="POST">
