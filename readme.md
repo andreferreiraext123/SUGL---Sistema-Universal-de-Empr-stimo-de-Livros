@@ -48,10 +48,14 @@ biblioteca_comunitaria/
 │
 ├── app/
 │   ├── templates/       # Para armazenar os arquivos HTML.
+|   |_ index.html
 │   ├── static/          # Para arquivos estáticos (CSS, JavaScript).
+|   |_ style.css
 │   ├── models/          # Para definir os modelos de dados.
 │   ├── routes/          # Para gerenciar as rotas da aplicação.
+|   |_ routes.py
 │   └── utils/           # Para funções utilitárias.
+|   |_ __init__.py
 │
 ├── migrations/          # Para gerenciar as migrações do banco de dados.
 │
