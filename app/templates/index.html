@@ -81,7 +81,12 @@
             <h1>Empréstimo</h1>
             <form action="/loan" method="POST">
                 <label for="livro_id">ID do Livro:</label>
-                <input type="number" id="livro_id" name="livro_id" required>
+                <select id="livro_id" name="livro_id" required>
+                    <!-- Os IDs dos livros serão adicionados aqui dinamicamente -->
+                    {% for livro in livros_disponiveis %}
+                    <option value="{{ livro[0] }}">{{ livro[0] }}</option> <!--Mudando de tupla para inteiro-->
+                    {% endfor %}
+                </select>
                 
                 <label for="nome">Nome do Responsável:</label>
                 <input type="text" id="nome" name="nome" required>

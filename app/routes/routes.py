@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 import psycopg2
 from datetime import datetime
 from app import app  # Importa a instância da app
@@ -12,6 +12,7 @@ def get_db_connection():
         password="postgres"
     )
     return conn
+
 
 # Rota principal, que renderiza o formulário e a lista de livros
 @app.route('/')
@@ -30,10 +31,16 @@ def formulario_livro():
     """)
     
     livros = cur.fetchall()
+
+    # Obter a lista de livros disponíveis
+    cur.execute("SELECT id FROM Livros WHERE id NOT IN (SELECT livro_id FROM Emprestimos)")
+    livros_disponiveis = cur.fetchall()
+
     cur.close()
     conn.close()
+    #print(livros_disponiveis)
+    return render_template('index.html', livros=livros, livro_pesquisado=None, livros_disponiveis=livros_disponiveis)
 
-    return render_template('index.html', livros=livros, livro_pesquisado=None)
 
 # Rota para cadastro de livros
 @app.route('/submit', methods=['POST'])
@@ -80,12 +87,18 @@ def search_livro():
     conn.close()
     return render_template('index.html', livros=livros, livro_pesquisado=livro_pesquisado)
 
+
 # Rota para realizar empréstimo de livro
 @app.route('/loan', methods=['POST'])
 def loan_livro():
     nome = request.form['nome']
     email = request.form['email']
-    livro_id = int(request.form['livro_id'])
+    livro_id = request.form['livro_id']
+    print(livro_id)
+    # Ajuste para garantir que estamos lidando com o valor correto
+    livro_id = int(livro_id)
+    print(livro_id)
+
     data_inicio = request.form['data_inicio']
     data_expiracao = request.form['data_expiracao']
 
@@ -104,6 +117,9 @@ def loan_livro():
     cur.close()
     conn.close()
     return redirect(url_for('formulario_livro'))
+
+
+
 
 # Rota para atualizar o status do livro
 @app.route('/update_status', methods=['POST'])
@@ -128,6 +144,8 @@ def update_status():
     conn.close()
 
     return redirect(url_for('formulario_livro'))
+
+
 
 # Rota para excluir livro
 @app.route('/delete/<int:livro_id>', methods=['POST'])
