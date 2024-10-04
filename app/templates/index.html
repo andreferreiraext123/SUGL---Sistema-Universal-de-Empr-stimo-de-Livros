@@ -59,11 +59,9 @@
                         ID: {{ livro[0] }} | Título: {{ livro[1] }} | Status: {{ livro[2] }}
                         <form action="/update_status" method="POST" style="display:inline;">
                             <input type="hidden" name="livro_id" value="{{ livro[0] }}">
-                            <button type="submit">
-                                {% if livro[2] == 'Disponível' %}
-                                    Marcar como Emprestado
-                                {% else %}
-                                    Marcar como Disponível
+                            <button type="submit">                    
+                                {% if livro[2] == 'Emprestado' %}
+                                    Torná-lo disponível
                                 {% endif %}
                             </button>
                         </form>
