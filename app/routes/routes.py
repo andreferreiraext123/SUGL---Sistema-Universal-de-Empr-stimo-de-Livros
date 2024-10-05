@@ -14,16 +14,12 @@ def get_db_connection():
     return conn
 
 
-
 @app.template_filter('strftime')
 def format_datetime(value, format='%d/%m/%Y %H:%M:%S'):
     """Converte datetime para string formatada."""
     if value is None:
         return ""
     return value.strftime(format)
-
-
-
 
 # Rota principal, que renderiza o formulário e a lista de livros
 @app.route('/')
@@ -54,8 +50,6 @@ def formulario_livro():
     cur.close()
     conn.close()
     return render_template('index.html', livros=livros, livro_pesquisado=None, livros_disponiveis=livros_disponiveis, historico=historico)
-
-
 
 
 # Rota para cadastro de livros
@@ -135,10 +129,6 @@ def loan_livro():
     return redirect(url_for('formulario_livro'))
 
 
-
-
-
-# Rota para atualizar o status do livro
 # Rota para atualizar o status do livro para disponível
 @app.route('/update_status', methods=['POST'])
 def update_status():
@@ -158,8 +148,6 @@ def update_status():
     registrar_operacao(f"Livro ID {livro_id} marcado como disponível.")
 
     return redirect(url_for('formulario_livro'))
-
-
 
 
 # Rota para excluir livro

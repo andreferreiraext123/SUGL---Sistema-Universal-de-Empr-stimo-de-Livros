@@ -252,9 +252,6 @@ button:hover {
 }
 
 
-
-
-
 /* Margem superior específica para resolução 390x844 */
 @media (max-width: 390px) and (max-height: 844px) {
     .container {
