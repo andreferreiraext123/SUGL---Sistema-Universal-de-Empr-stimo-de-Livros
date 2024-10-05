@@ -14,8 +14,18 @@ def get_db_connection():
     return conn
 
 
+
+@app.template_filter('strftime')
+def format_datetime(value, format='%d/%m/%Y %H:%M:%S'):
+    """Converte datetime para string formatada."""
+    if value is None:
+        return ""
+    return value.strftime(format)
+
+
+
+
 # Rota principal, que renderiza o formulário e a lista de livros
-# Rota principal, que renderiza o formulário e a lista de livros AQUI
 @app.route('/')
 def formulario_livro():
     conn = get_db_connection()
@@ -33,9 +43,18 @@ def formulario_livro():
     cur.execute("SELECT id FROM Livros WHERE status = 'Disponível'")
     livros_disponiveis = cur.fetchall()
 
+    # Obter o histórico de operações
+    #cur.execute("SELECT descricao FROM Historico ORDER BY data DESC")
+    #historico = cur.fetchall()
+
+    # Obter o histórico de operações com a data
+    cur.execute("SELECT descricao, data FROM Historico ORDER BY data DESC")
+    historico = cur.fetchall()  # Mantém o retorno como uma lista de tuplas
+
     cur.close()
     conn.close()
-    return render_template('index.html', livros=livros, livro_pesquisado=None, livros_disponiveis=livros_disponiveis)
+    return render_template('index.html', livros=livros, livro_pesquisado=None, livros_disponiveis=livros_disponiveis, historico=historico)
+
 
 
 
@@ -86,7 +105,6 @@ def search_livro():
 
 
 # Rota para realizar empréstimo de livro
-# Rota para realizar empréstimo de livro
 @app.route('/loan', methods=['POST'])
 def loan_livro():
     nome = request.form['nome']
@@ -110,7 +128,12 @@ def loan_livro():
     conn.commit()
     cur.close()
     conn.close()
+
+    # Registrar a operação no histórico
+    registrar_operacao(f"Livro ID {livro_id} emprestado para {nome}.")
+
     return redirect(url_for('formulario_livro'))
+
 
 
 
@@ -131,6 +154,9 @@ def update_status():
     cur.close()
     conn.close()
 
+    # Registrar a operação no histórico
+    registrar_operacao(f"Livro ID {livro_id} marcado como disponível.")
+
     return redirect(url_for('formulario_livro'))
 
 
@@ -150,4 +176,20 @@ def delete_livro(livro_id):
     cur.close()
     conn.close()
 
+    # Registrar a operação no histórico
+    registrar_operacao(f"Livro ID {livro_id} excluído.")
+
     return redirect(url_for('formulario_livro'))
+
+
+
+# Função para registrar operações no histórico
+def registrar_operacao(descricao):
+    print(f"Registrando operação: {descricao}")  # Log para depuração
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('INSERT INTO Historico (descricao) VALUES (%s)', (descricao,))
+    conn.commit()
+    cur.close()
+    conn.close()
+    #print("Operação registrada com sucesso")  # Log para depuração

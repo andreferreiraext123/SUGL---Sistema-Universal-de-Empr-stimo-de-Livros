@@ -5,9 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Biblioteca</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const btnHistory = document.querySelector('.history-button'); // Seletor corrigido
+            const btnPopup = document.getElementById('historyPopup'); // Seletor corrigido
+            const btnClose = document.querySelector('.close');
+            
+            const fnToggle = () =>{btnPopup.classList.toggle('active');}
+            btnHistory.addEventListener('click',fnToggle);
+            btnClose.addEventListener('click', fnToggle);
+
+            // btnClose.addEventListener('click', function() {
+            //     console.log('Testando');
+            //     btnPopup.classList.toggle('active'); // Toggle da classe 'active' sem o ponto
+            // });                
+
+        });
+    </script>
 </head>
 <body>
     <div class="container">
+        <!-- Aqui popup -->
+        <!-- Botão para abrir o popup -->
+        <label for="historyCheckbox" class="history-button">H</label>
+
+        <!-- Popup de Histórico de Operações -->
+        <div id="historyPopup" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2>Histórico</h2>
+                <ul id="historyList">
+                    {% for operacao in historico %}
+                        <li>{{ operacao[0] }} - {{ operacao[1]|strftime('%d/%m/%Y %H:%M:%S') }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
         <!-- Seção de Cadastro de Livro -->
         <div class="section">
             <h1>Cadastro de Livro</h1>
