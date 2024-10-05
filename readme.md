@@ -67,7 +67,7 @@ O SUGL foi desenvolvido para facilitar o gerenciamento de bibliotecas comunitár
 ![Mobile Version](app/static/images/mobile.PNG)
 
 ### Desktop Version
-![Desktop Version](app/static/images/desktop.png)
+![Desktop Version](app/static/images/desktop.PNG)
 
 ## Contribuição
 
@@ -89,9 +89,9 @@ O SUGL foi desenvolvido para facilitar o gerenciamento de bibliotecas comunitár
 
 ## Diagrama do projetop
 
-![Der](app/static/images/der.png)
+![Der](app/static/images/der.PNG)
 
 
 ## Licença
 
-Este projeto está licenciado sob a MIT License.
+Este projeto está licenciado sob a [MIT License](LICENSE).
