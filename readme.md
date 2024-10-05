@@ -63,10 +63,12 @@ O SUGL foi desenvolvido para facilitar o gerenciamento de bibliotecas comunitár
 ## Imagens
 
 ### Mobile Version
-![Mobile Version](app/static/images/mobile.png)
+
+![Mobile Version](app/static/images/mobile.PNG)
 
 ### Desktop Version
-![Desktop Version](app/static/images/desktop.png)
+
+![Desktop Version](app/static/images/desktop.PNG)
 
 ## Contribuição
 
