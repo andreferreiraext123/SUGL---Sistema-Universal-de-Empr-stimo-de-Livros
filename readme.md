@@ -6,6 +6,25 @@ Este projeto é um sistema de gerenciamento de empréstimos de livros para bibli
 
 O SUGL foi desenvolvido para facilitar o gerenciamento de bibliotecas comunitárias, permitindo que os administradores registrem livros, usuários e transações de empréstimo e devolução de forma eficiente. Além disso, o sistema envia notificações via Telegram para manter os usuários informados sobre o status de seus empréstimos.
 
+## Demonstração do Sistema
+
+Confira uma demonstração completa do SUGL - Sistema Universal de Empréstimo de Livros no vídeo abaixo:
+
+[![Demonstração do Sistema](https://img.youtube.com/vi/bIAnefcTMPA/0.jpg)](https://youtu.be/bIAnefcTMPA)
+
+Ou assista diretamente no [YouTube](https://youtu.be/bIAnefcTMPA).
+
+
+## Imagens
+
+### Mobile Version
+
+![Mobile Version](app/static/images/mobile.PNG)
+
+### Desktop Version
+![Desktop Version](app/static/images/desktop.PNG)
+
+
 ### Funcionalidades Principais
 
 - **Registro de Livros**: Adicione novos livros ao sistema com informações detalhadas.
@@ -59,15 +78,6 @@ O SUGL foi desenvolvido para facilitar o gerenciamento de bibliotecas comunitár
 5. **Registrar Empréstimos**: Utilize o sistema para registrar o empréstimo de livros.
 6. **Devolver Livros**: Atualize o status de devolução quando o usuário devolver o livro.
 7. **Relatórios**: Gere relatórios sobre livros disponíveis e emprestados.
-
-## Imagens
-
-### Mobile Version
-
-![Mobile Version](app/static/images/mobile.PNG)
-
-### Desktop Version
-![Desktop Version](app/static/images/desktop.PNG)
 
 ## Contribuição
 
